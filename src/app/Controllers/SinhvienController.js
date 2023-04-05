@@ -1,10 +1,15 @@
-const db = require('../../../models/index')
+const db = require('../../../models/index');
 
 let index = async (req, res) => {
 
   try {
-    let sinhvien = await db.Sinhvien.findAll();
-    //console.log(sinhvien);
+    let sinhvien = await db.Sinhvien.findAll({
+      include: [{
+        model: db.Lophoc,      
+        
+       }]
+    });
+    console.table(sinhvien);
     res.render('sinhvien/sinhvien', { sinhvien });
   }
   catch (e) {
@@ -60,17 +65,15 @@ let edit = async (req, res) => {
   }
 
 };
-let update = async(req,res) =>{
+let update = async (req, res) => {
   //console.log(req.body.txt_id);
-  let id =req.body.txt_id;
-  try
-  {
-  // check id trong CSDL
-  let exits_id =await db.Sinhvien.findOne({
-    where:{id:id},
-      })
-    if(exits_id)
-    {
+  let id = req.body.txt_id;
+  try {
+    // check id trong CSDL
+    let exits_id = await db.Sinhvien.findOne({
+      where: { id: id },
+    })
+    if (exits_id) {
       let sinhvien = await db.Sinhvien.update({
         ma_sv: req.body.txt_ma_sv,
         ten_sv: req.body.txt_ten_sv,
@@ -80,27 +83,23 @@ let update = async(req,res) =>{
         sdt_sv: req.body.txt_sdt_sv,
         ma_lop: req.body.txt_malop,
       },
-      {
-        where: { id: id },
-     });
-      
-      if(sinhvien)
-      {
+        {
+          where: { id: id },
+        });
+
+      if (sinhvien) {
         console.log('Cập nhật dữ liệu thành công!!');
         return res.redirect('/sinhvien');
       }
-      else
-      {
+      else {
         console.log('Vui lòng kiểm tra kết nối!!');
       }
     }
-    else
-    {
+    else {
       console.log('ID này không tồn tại trong hệ thống!!!');
     }
   }
-  catch(e)
-  {
+  catch (e) {
     console.log(e);
   }
 }
@@ -123,6 +122,7 @@ let destroy = async (req, res) => {
     console.log(e);
   }
 }
+
 module.exports =
 {
   index: index,

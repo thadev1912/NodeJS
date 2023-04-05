@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+       
+      this.belongsTo(models.Lophoc,
+        { 
+          targetKey:'ma_lop',
+          foreignKey:'ma_lop',               
+        
+      })
+     
+     
     }
   }
   Sinhvien.init({
@@ -26,4 +35,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Sinhvien',
   });
   return Sinhvien;
+
 };
