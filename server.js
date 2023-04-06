@@ -2,22 +2,22 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const route = require('./src/routes/index');
-const handlebars = require('express-handlebars');;
+const handlebars = require('express-handlebars');
 const path = require('path');
 const connectDB = require('./config');
+const helper = require('./src/helper');
 const bodyParser = require("body-parser");
-//const db=require('../../../config');
 app.use(express.static(path.join(__dirname, 'public'))); // cần check lại link css  
 app.use(express.json())  // hỗ trợ json
 app.use(bodyParser.urlencoded({ extended: true }));  // dùng để res.body
 route(app);
 connectDB();
+helper();
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
 //Templete Engine
-
 app.engine('hbs', handlebars.engine({
   extname: '.hbs',
   //code để render re view handlebars
@@ -25,8 +25,6 @@ app.engine('hbs', handlebars.engine({
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true
   },
-
-
 },
 ));
 app.set('view engine', 'hbs');

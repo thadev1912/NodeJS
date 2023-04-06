@@ -26,9 +26,12 @@
                        
                     </div>
                     <div class="col-6">
-                        <label>GIỚI TÍNH</label>
-                        <input name="txt_gioitinh_sv" id="txt_gioitinh_sv" class="form-control" type="text" value="">
-                       
+                        <label>GIỚI TÍNH</label><br>
+                        {{!-- <input name="txt_gioitinh_sv" id="txt_gioitinh_sv" class="form-control" type="text" value=""> --}}
+                        <div class="mt-2">
+                         <input type='radio' name="txt_gioitinh_sv"  value='1' />&nbsp;Nam
+                         <input type='radio' name="txt_gioitinh_sv" value='0' />&nbsp; Nữ
+                       </div>
                     </div>
 </div>
 <div class="form-row"> <!--thuộc tính form-row nó giúp chia 2 cột trên 1 row của nó-->
@@ -43,8 +46,13 @@
                        
                     </div>
                     <div class="col-6">
-                        <label>MÃ LỚP</label>
-                        <input name="txt_malop" id="txt_malop" class="form-control" type="text" value="">
+                        <label>MÃ LỚP</label>                        
+                          <select class="form-control" name="txt_malop" id="txt_malop">
+                          <option value="">---Vui lòng chọn Lớp---</option>
+                          {{#each ls_lop}}                       
+                              <option value="{{this.ma_lop}}">{{this.ten_lop}} </option>                        
+                                  {{/each}}
+                        </select>
                        
                     </div>
 </div>

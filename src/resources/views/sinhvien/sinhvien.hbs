@@ -22,10 +22,10 @@
                         {{#each sinhvien}}
                         <tr>
                               <td headers="name">{{this.ma_sv}}</td>
-                              <td headers="name">{{this.ten_sv}}</td>
-                              <td headers="name">{{this.gioitinh_sv}}</td>
+                              <td headers="name">{{this.ten_sv}}</td>                              
+                              <td headers="name">{{#if this.gioitinh_sv}} Nam {{^}} Nữ {{/if}}</td>
                               <td headers="name">{{this.diachi_sv}}</td>
-                               <td headers="name">{{this.sdt_sv}}</td>
+                              <td headers="name">{{this.sdt_sv}}</td>
                               <td headers="name">{{this.Lophoc.ten_lop}}</td>
                               <td><a href="sinhvien/sua/{{this.id}}" type="button"
                                           class="btn btn-primary">Sửa</a>||

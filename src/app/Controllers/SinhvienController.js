@@ -17,7 +17,9 @@ let index = async (req, res) => {
   }
 }
 let create = async (req, res) => {
-  return res.render('sinhvien/them_sinhvien');
+  let ls_lop=await db.Lophoc.findAll();
+  //console.log(ls_lop);
+  return res.render('sinhvien/them_sinhvien',{ls_lop});
 }
 let store = async (req, res) => {
   //console.log(req.body);
@@ -45,8 +47,10 @@ let store = async (req, res) => {
 };
 let edit = async (req, res) => {
   //console.log(req.params.id);
-  let id = req.params.id;
+  
   try {
+    let ls_lop=await db.Lophoc.findAll();
+    let id = req.params.id;
     let sinhvien = await db.Sinhvien.findOne({
       where: { id: id },
       raw: true,
@@ -54,7 +58,7 @@ let edit = async (req, res) => {
     if (sinhvien) {
       console.log('Lấy dữ liệu thành công!!!');
       console.log(sinhvien);
-      return res.render('sinhvien/sua_sinhvien', { sinhvien });
+      return res.render('sinhvien/sua_sinhvien', { sinhvien,ls_lop });
     }
     else {
       console.log('Lỗi kết nối dữ liệu!!!');
