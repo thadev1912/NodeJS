@@ -1,5 +1,6 @@
 const db = require('../../../models/index');
-
+const Sequelize = require('sequelize');
+var {validationResult} = require('express-validator'); 
 let index = async (req, res) => {
 
   try {
@@ -17,13 +18,33 @@ let index = async (req, res) => {
   }
 }
 let create = async (req, res) => {
+  
   let ls_lop=await db.Lophoc.findAll();
   //console.log(ls_lop);
   return res.render('sinhvien/them_sinhvien',{ls_lop});
 }
+let search=async(req,res)=>{
+  const Op = Sequelize.Op;
+    let info=req.body.txt_timkiem;
+  let sinhvien=  await db.Sinhvien.findAll({
+      where:{
+        ten_sv: {  [Op.like]: '%' + info + '%' },
+      }
+    });
+    if(sinhvien)
+    {
+      res.render('sinhvien/sinhvien', { sinhvien });
+    }
+    //console.log(info);
+}
 let store = async (req, res) => {
-  //console.log(req.body);
+
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({ errors: errors.array() });     
+      return;
+    }
     let sinhvien = db.Sinhvien.create({
       ma_sv: req.body.txt_ma_sv,
       ten_sv: req.body.txt_ten_sv,
@@ -35,6 +56,7 @@ let store = async (req, res) => {
     });
     if (sinhvien) {
       console.log('Thêm Dữ Liệu Thành Công!!!');
+      req.toastr.success('Successfully logged in.', "You're in!");
       return res.redirect('/sinhvien');
     }
     else {
@@ -115,6 +137,7 @@ let destroy = async (req, res) => {
       raw: true,
     });
     if (sinhvien) {
+      req.toastr.success('Successfully logged in.', "You're in!");
       console.log('Xóa dữ liệu thành công!!!');
       res.redirect('/sinhvien');
     }
@@ -135,4 +158,5 @@ module.exports =
   edit: edit,
   update: update,
   destroy: destroy,
+  search: search,
 };
