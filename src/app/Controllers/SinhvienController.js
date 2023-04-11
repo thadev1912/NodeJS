@@ -149,7 +149,33 @@ let destroy = async (req, res) => {
     console.log(e);
   }
 }
-
+let get_api=async(req,res) => {
+  try{
+  let data =await db.Sinhvien.findAll();
+  if(data)
+  {
+    console.log(data);
+     res.json({
+      data:data,
+      status:200,
+      messege:'Lấy dữ liệu thành công!!!'
+     });
+  }
+  else
+  {
+    console.log(data);
+     res.send({
+      data:null,
+      status:404,
+      messege:'Không lấy được dữ liệu!!!'
+     });
+  }
+  }
+  catch(e)
+  {
+  console.log(e);
+  }
+}
 module.exports =
 {
   index: index,
@@ -159,4 +185,5 @@ module.exports =
   update: update,
   destroy: destroy,
   search: search,
+  get_api:get_api,
 };
