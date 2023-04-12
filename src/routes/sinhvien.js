@@ -10,6 +10,6 @@ router.get('/sua/:id', sinhvien.edit);
 router.post('/capnhat', sinhvien.update);
 router.get('/xoa/:id', sinhvien.destroy);
 router.post('/timkiem', sinhvien.search);
-router.get('/get_api', sinhvien.get_api);
-
+router.get('/get_api',sinhvien.get_api);
+router.post('/store_api',sinhvien.store_api);
 module.exports = router;

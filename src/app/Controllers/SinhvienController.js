@@ -149,6 +149,7 @@ let destroy = async (req, res) => {
     console.log(e);
   }
 }
+//Api
 let get_api=async(req,res) => {
   try{
   let data =await db.Sinhvien.findAll();
@@ -176,6 +177,27 @@ let get_api=async(req,res) => {
   console.log(e);
   }
 }
+let store_api = async(req,res) =>{
+  console.log('đã kết nối');
+  console.log(req.body.ma_sv);
+  let sinhvien = db.Sinhvien.create({
+    ma_sv:  req.body.ma_sv,
+    ten_sv:  req.body.ten_sv,
+    ngaysinh_sv:  req.body.ngaysinh_sv,
+    gioitinh_sv:  req.body.gioitinh_sv,
+    diachi_sv:  req.body.diachi_sv,
+    sdt_sv:  req.body.sdt_sv,
+    ma_lop:  req.body.ma_lop,
+  }); 
+  if(sinhvien)
+  {
+   
+     res.json({   
+      status:200,
+      messege:'Thêm dữ liệu thành công!!!'
+     });
+  } 
+}
 module.exports =
 {
   index: index,
@@ -186,4 +208,5 @@ module.exports =
   destroy: destroy,
   search: search,
   get_api:get_api,
+  store_api:store_api,
 };
