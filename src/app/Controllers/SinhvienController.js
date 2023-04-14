@@ -178,9 +178,9 @@ let get_api=async(req,res) => {
   }
 }
 let store_api = async(req,res) =>{
-  console.log('đã kết nối');
-  console.log(req.body.ma_sv);
-  let sinhvien = db.Sinhvien.create({
+  console.log('đã kết nối lưu');
+  console.log(req.body);
+  let sinhvien = await db.Sinhvien.create({
     ma_sv:  req.body.ma_sv,
     ten_sv:  req.body.ten_sv,
     ngaysinh_sv:  req.body.ngaysinh_sv,
@@ -188,13 +188,57 @@ let store_api = async(req,res) =>{
     diachi_sv:  req.body.diachi_sv,
     sdt_sv:  req.body.sdt_sv,
     ma_lop:  req.body.ma_lop,
-  }); 
+  }  
+  ); 
   if(sinhvien)
   {
    
      res.json({   
       status:200,
       messege:'Thêm dữ liệu thành công!!!'
+     });
+  } 
+}
+let update_api =async(req,res) =>
+{
+  console.log('đã kết nối cập nhật');
+   console.log(req.body);
+   let id=req.body.id;
+  let sinhvien = db.Sinhvien.update({
+    ma_sv:  req.body.ma_sv,
+    ten_sv:  req.body.ten_sv,
+    ngaysinh_sv:  req.body.ngaysinh_sv,
+    gioitinh_sv:  req.body.gioitinh_sv,
+    diachi_sv:  req.body.diachi_sv,
+    sdt_sv:  req.body.sdt_sv,
+    ma_lop:  req.body.ma_lop,
+  },
+  {
+    where:{id:id}
+  }
+  ); 
+  if(sinhvien)
+  {
+   
+     res.json({   
+      status:200,
+      messege:'Cập nhật dữ liệu thành công!!!'
+     });
+  } 
+}
+let delete_api =async (req,res) =>{
+  console.log('đã kết nối xóa');
+  //console.log(req.body.id);
+  let id=req.body.id;
+  let sinhvien = await db.Sinhvien.destroy({
+    where: { id: id },   
+  });
+  if(sinhvien)
+  {
+   
+     res.json({   
+      status:200,
+      messege:'Xóa dữ liệu thành công!!!'
      });
   } 
 }
@@ -209,4 +253,6 @@ module.exports =
   search: search,
   get_api:get_api,
   store_api:store_api,
+  update_api:update_api,
+  delete_api:delete_api,
 };
