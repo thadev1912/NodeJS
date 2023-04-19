@@ -204,7 +204,7 @@ let update_api =async(req,res) =>
   console.log('đã kết nối cập nhật');
    console.log(req.body);
    let id=req.body.id;
-  let sinhvien = db.Sinhvien.update({
+  let sinhvien = await db.Sinhvien.update({
     ma_sv:  req.body.ma_sv,
     ten_sv:  req.body.ten_sv,
     ngaysinh_sv:  req.body.ngaysinh_sv,

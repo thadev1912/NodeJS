@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const sinhvien = require('../app/Controllers/SinhvienController'); 
 const validate=require('../../request/validate_sinhvien');
+
 /* GET users listing. */
 router.get('/', sinhvien.index);
 router.get('/them', sinhvien.create);

@@ -20,6 +20,7 @@ app.use(session({
   resave: 'true',
   secret: 'secret'
 }));
+
 app.use(flash());
 app.use(cookieParser());
 app.use(toastr());
