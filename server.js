@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+require('dotenv').config()
 const route = require('./src/routes/index');
 const handlebars = require('express-handlebars');
 const path = require('path');
