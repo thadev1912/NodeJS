@@ -33,7 +33,12 @@ const xulydangnhap = async (req, res) => {
    }
 
 }
+const xulydangxuat =async(req,res)=>{
+   console.log('đã nhận được yêu cầu đăng xuất')
+ await  res.status(200).json('Đăng xuất thành công');
+}
 module.exports = {
    xulydangnhap: xulydangnhap,
+   xulydangxuat:xulydangxuat,
    list_user: list_user,
 }

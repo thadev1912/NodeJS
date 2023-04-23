@@ -2,7 +2,7 @@ const jwt=require("jsonwebtoken");
 const middlewareAuthentication ={
     //verifyToken ==> xác thực Token
     verifyToken:(req,res,next) =>{
-        const token =req.headers.authorization;
+        const token =req.headers.token;
         console.log('Token nhận được là',token);
         if(token)
         {
