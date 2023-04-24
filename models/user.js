@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      //cách xóa đồng bộ!!!
+      // db.coordinator.userProfile = db.coordinator.belongsTo(db.userProfile, {
+      //   onDelete: "CASCADE",
+      //   onUpdate: "CASCADE",
+      // }); 
+       User.belongsToMany(models.Role, { through: 'User_Role',foreignKey:'id_user' });
+       models.Role.belongsToMany(User, { through: 'User_Role',foreignKey:'id_role' });
+  
+  
     }
   }
   User.init({

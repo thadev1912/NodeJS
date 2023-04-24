@@ -2,10 +2,25 @@ const db = require('../../../models/index');
 const jwt = require("jsonwebtoken");
 // The secret should be an unguessable long string (you can use a password generator for this!)
 const list_user = async (req, res) => {
-   let data = await db.User.findAll();
-   console.log(data);
+   let data = await db.User.findOne({
+      where:{username:'sieuga'},
+      include: [{
+         model: db.Role 
+         
+        },
+        ],
+       
+       
+   });
+
+    let role_user=data.Roles;
+    role_user.map((item,index)=>{
+      console.log('User có những quyền:',item.role_name);
+
+    })
+   //console.log('Role user là',data.Roles);
    return res.json({
-      data: data,
+      data: data.Roles,
      
    })
 }
@@ -37,6 +52,7 @@ const xulydangxuat =async(req,res)=>{
    console.log('đã nhận được yêu cầu đăng xuất')
  await  res.status(200).json('Đăng xuất thành công');
 }
+
 module.exports = {
    xulydangnhap: xulydangnhap,
    xulydangxuat:xulydangxuat,
