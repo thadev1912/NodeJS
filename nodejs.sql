@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 08, 2023 lúc 11:42 AM
--- Phiên bản máy phục vụ: 10.4.25-MariaDB
--- Phiên bản PHP: 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: Apr 24, 2023 at 05:20 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `nodejs`
+-- Database: `nodejs`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bangdiems`
+-- Table structure for table `bangdiems`
 --
 
 CREATE TABLE `bangdiems` (
@@ -46,7 +46,7 @@ CREATE TABLE `bangdiems` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contacts`
+-- Table structure for table `contacts`
 --
 
 CREATE TABLE `contacts` (
@@ -60,7 +60,7 @@ CREATE TABLE `contacts` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `demo`
+-- Table structure for table `demo`
 --
 
 CREATE TABLE `demo` (
@@ -70,7 +70,7 @@ CREATE TABLE `demo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `demo`
+-- Dumping data for table `demo`
 --
 
 INSERT INTO `demo` (`id`, `hoten`, `namsinh`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `demo` (`id`, `hoten`, `namsinh`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `lophocs`
+-- Table structure for table `lophocs`
 --
 
 CREATE TABLE `lophocs` (
@@ -93,7 +93,7 @@ CREATE TABLE `lophocs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `lophocs`
+-- Dumping data for table `lophocs`
 --
 
 INSERT INTO `lophocs` (`id`, `ma_lop`, `ten_lop`, `gvcn`, `createdAt`, `updatedAt`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `lophocs` (`id`, `ma_lop`, `ten_lop`, `gvcn`, `createdAt`, `updatedA
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `monhocs`
+-- Table structure for table `monhocs`
 --
 
 CREATE TABLE `monhocs` (
@@ -118,7 +118,74 @@ CREATE TABLE `monhocs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sequelizemeta`
+-- Table structure for table `permissons`
+--
+
+CREATE TABLE `permissons` (
+  `id` int(11) NOT NULL,
+  `permisson_name` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `permissons`
+--
+
+INSERT INTO `permissons` (`id`, `permisson_name`, `createdAt`, `updatedAt`) VALUES
+(1, 'Add', '2023-04-23 10:22:22', '2023-04-23 10:22:22'),
+(2, 'Edit', '2023-04-23 10:22:22', '2023-04-23 10:22:22'),
+(3, 'Update', '2023-04-23 10:22:22', '2023-04-23 10:22:22'),
+(4, 'Delete', '2023-04-23 10:22:22', '2023-04-23 10:22:22'),
+(5, 'List', '2023-04-23 10:22:22', '2023-04-23 10:22:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role_name`, `createdAt`, `updatedAt`) VALUES
+(1, 'Admin', '2023-04-23 10:21:44', '2023-04-23 10:21:44'),
+(2, 'Guest', '2023-04-23 10:21:44', '2023-04-23 10:21:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_permissions`
+--
+
+CREATE TABLE `role_permissions` (
+  `id` int(11) NOT NULL,
+  `id_role` varchar(255) DEFAULT NULL,
+  `id_permission` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `role_permissions`
+--
+
+INSERT INTO `role_permissions` (`id`, `id_role`, `id_permission`, `createdAt`, `updatedAt`) VALUES
+(1, '1', '1', '2023-04-23 10:25:20', '2023-04-23 10:25:20'),
+(2, '1', '2', '2023-04-23 10:25:20', '2023-04-23 10:25:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sequelizemeta`
 --
 
 CREATE TABLE `sequelizemeta` (
@@ -126,7 +193,7 @@ CREATE TABLE `sequelizemeta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `sequelizemeta`
+-- Dumping data for table `sequelizemeta`
 --
 
 INSERT INTO `sequelizemeta` (`name`) VALUES
@@ -135,12 +202,17 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20230404030416-create-sinhvien.js'),
 ('20230404120023-create-lophoc.js'),
 ('20230406045730-create-monhoc.js'),
-('20230406051409-create-bangdiem.js');
+('20230406051409-create-bangdiem.js'),
+('20230419094236-create-user.js'),
+('20230423081539-create-role.js'),
+('20230423081720-create-permisson.js'),
+('20230423081824-create-user-role.js'),
+('20230423081936-create-role-permission.js');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sinhviens`
+-- Table structure for table `sinhviens`
 --
 
 CREATE TABLE `sinhviens` (
@@ -157,23 +229,16 @@ CREATE TABLE `sinhviens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `sinhviens`
+-- Dumping data for table `sinhviens`
 --
 
 INSERT INTO `sinhviens` (`id`, `ma_sv`, `ten_sv`, `ngaysinh_sv`, `gioitinh_sv`, `diachi_sv`, `sdt_sv`, `ma_lop`, `createdAt`, `updatedAt`) VALUES
-(1, 'SV01', 'Ngô Mỹ Ái', '0000-00-00', 1, 'Ninh Kiều-Cần Thơ', '0937 565 124', 'CNTT-10', '2023-04-04 09:12:13', '2023-04-05 15:34:25'),
-(5, 'SV02', 'Võ Thị Hồng Nhung', '2001-04-18', 0, 'Lê Hồng Phong-Bình Thủy-Cần Thơ', '0378 1514 178', 'CNTT-10', '2023-04-04 08:42:12', '2023-04-05 15:34:59'),
-(8, 'SV03', 'Đỗ Minh Chiến', '0000-00-00', 1, 'Mậu Thân-Ninh Kiều-Cần Thơ', '0877 1514 651', 'CNTT-10', '2023-04-04 08:46:39', '2023-04-05 03:59:35'),
-(9, 'SV04', 'Trần Thị Mỹ Duyên', '0000-00-00', 0, 'Võ Nguyên Giáp-Cái Răng-Cần Thơ', '087 1517 179', 'CNTT-11', '2023-04-04 09:35:30', '2023-04-06 01:48:05'),
-(12, 'SV05', 'Hồ Phát Tài', '0000-00-00', 1, 'Đề Thám-Ninh Kiều-Cần Thơ', '0399 514 846', 'CNTT-10', '2023-04-05 02:09:11', '2023-04-06 01:47:56'),
-(13, 'SV06', 'Lý Mộng Trinh', '0000-00-00', 0, 'Cái Răng-Cần Thơ', '0339 814 147', 'CNTT-11', '2023-04-05 02:09:58', '2023-04-05 03:59:58'),
-(17, 'SV08', 'Ngô Thị Tuyết Minh', '2000-04-05', 0, 'Cờ Đỏ-Cần Thơ', '0378 1514 214', 'CNTT-10', '2023-04-05 06:42:51', '2023-04-05 15:34:32'),
-(24, 'SV07', 'Lưu Đức Thiện', '2023-04-06', 1, 'Cờ Đỏ-Cần Thơ', '0378 1514 178', 'CNTT-11', '2023-04-06 10:52:25', '2023-04-08 09:40:54');
+(62, '13', '13', '0000-00-00', 1, '13', '13', '13', '2023-04-18 09:46:03', '2023-04-18 09:46:03');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tintucdatxanhs`
+-- Table structure for table `tintucdatxanhs`
 --
 
 CREATE TABLE `tintucdatxanhs` (
@@ -187,7 +252,7 @@ CREATE TABLE `tintucdatxanhs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `tintucdatxanhs`
+-- Dumping data for table `tintucdatxanhs`
 --
 
 INSERT INTO `tintucdatxanhs` (`id`, `tieude_baiviet`, `noidung_baiviet`, `danhmuc_baiviet`, `tacgia_baiviet`, `createdAt`, `updatedAt`) VALUES
@@ -195,104 +260,212 @@ INSERT INTO `tintucdatxanhs` (`id`, `tieude_baiviet`, `noidung_baiviet`, `danhmu
 (2, 'Trà Vinh ngày thêm đổi mới', 'Chiều 23-3, Thường trực Ban Chỉ đạo triển khai thực hiện Nghị quyết số 59-NQ/TW của Bộ Chính trị, Nghị quyết số 45/2022/QH15 của Quốc hội, Nghị quyết số 98/NQ-CP của Chính phủ và các dự án trọng điểm trên địa bàn thành phố Cần Thơ họp về tiến độ thực hiện', 'Tin Tức Thị Trường', 'Ngô Thị Diễm My', '2023-03-24 09:23:57', '2023-03-24 09:23:57'),
 (4, '3456', '3456', '3456', '3456', '2023-03-25 12:04:17', '2023-03-25 12:04:17');
 
+-- --------------------------------------------------------
+
 --
--- Chỉ mục cho các bảng đã đổ
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `diachi` varchar(255) DEFAULT NULL,
+  `sdt` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `diachi`, `sdt`, `password`, `createdAt`, `updatedAt`) VALUES
+(1, 'sieuga', 'sieuga@gmail.com', 'Cầu Kè-Trà vinh', '0908346989', '123', '2023-04-19 11:43:36', '2023-04-19 11:43:36'),
+(2, 'tha', 'tha@gmail.com', 'Cầu Kè-Trà vinh', '0908346989', '123', '2023-04-19 11:43:36', '2023-04-19 11:43:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_roles`
+--
+
+CREATE TABLE `user_roles` (
+  `id` int(11) NOT NULL,
+  `id_user` varchar(255) DEFAULT NULL,
+  `id_role` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_roles`
+--
+
+INSERT INTO `user_roles` (`id`, `id_user`, `id_role`, `createdAt`, `updatedAt`) VALUES
+(1, '1', '1', '2023-04-23 10:26:28', '2023-04-23 10:26:28'),
+(2, '1', '2', '2023-04-23 10:26:28', '2023-04-23 10:26:28'),
+(4, '2', '2', '2023-04-23 10:26:43', '2023-04-23 10:26:43');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bangdiems`
+-- Indexes for table `bangdiems`
 --
 ALTER TABLE `bangdiems`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `contacts`
+-- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `demo`
+-- Indexes for table `demo`
 --
 ALTER TABLE `demo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `lophocs`
+-- Indexes for table `lophocs`
 --
 ALTER TABLE `lophocs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `monhocs`
+-- Indexes for table `monhocs`
 --
 ALTER TABLE `monhocs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `sequelizemeta`
+-- Indexes for table `permissons`
+--
+ALTER TABLE `permissons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_permissions`
+--
+ALTER TABLE `role_permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sequelizemeta`
 --
 ALTER TABLE `sequelizemeta`
   ADD PRIMARY KEY (`name`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Chỉ mục cho bảng `sinhviens`
+-- Indexes for table `sinhviens`
 --
 ALTER TABLE `sinhviens`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tintucdatxanhs`
+-- Indexes for table `tintucdatxanhs`
 --
 ALTER TABLE `tintucdatxanhs`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `bangdiems`
+-- AUTO_INCREMENT for table `bangdiems`
 --
 ALTER TABLE `bangdiems`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `contacts`
+-- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `demo`
+-- AUTO_INCREMENT for table `demo`
 --
 ALTER TABLE `demo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `lophocs`
+-- AUTO_INCREMENT for table `lophocs`
 --
 ALTER TABLE `lophocs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `monhocs`
+-- AUTO_INCREMENT for table `monhocs`
 --
 ALTER TABLE `monhocs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `sinhviens`
+-- AUTO_INCREMENT for table `permissons`
 --
-ALTER TABLE `sinhviens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+ALTER TABLE `permissons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `tintucdatxanhs`
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `role_permissions`
+--
+ALTER TABLE `role_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `sinhviens`
+--
+ALTER TABLE `sinhviens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `tintucdatxanhs`
 --
 ALTER TABLE `tintucdatxanhs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
